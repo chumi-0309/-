@@ -14,6 +14,7 @@ LogBox.ignoreLogs([
 export default function RootLayout() {
   return (
     <Provider>
+      <StatusBar style="auto" />
       <Stack
         screenOptions={{
           animation: 'slide_from_right',
@@ -22,7 +23,9 @@ export default function RootLayout() {
           headerShown: false
         }}
       >
-        <Stack.Screen name="index" options={{ title: "" }} />
+        <Stack.Screen name="(tabs)" options={{ title: "" }} />
+        <Stack.Screen name="reader" options={{ title: "阅读" }} />
+        <Stack.Screen name="ocr" options={{ title: "图片识别" }} />
       </Stack>
       <Toast />
     </Provider>
