@@ -9,6 +9,41 @@ export interface Annotation {
   blockIndex: number;
   type: AnnotationType;
   createdAt: number;
+  /** 词级标注：该标注覆盖段落文本内的 [start, end) 字符区间；缺省表示段落级整段标注 */
+  start?: number;
+  end?: number;
+}
+
+/** 段落文本中的一个分词单元 */
+export interface TextToken {
+  text: string;
+  /** 该词在段落文本内的起始字符偏移 */
+  start: number;
+  end: number;
+  /** 是否可作为独立选中单位（中英数字词，标点/空白不可选） */
+  selectable: boolean;
+}
+
+/** 将段落文本切分为词/字符单元（中文按字、英文按词），用于逐词选中与标注 */
+export function splitWords(text: string): TextToken[] {
+  const tokens: TextToken[] = [];
+  const re = /[\u3400-\u9fff\u3040-\u30ff\uac00-\ud7af]|\w+|\s+|./g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text))) {
+    const tok = m[0];
+    if (!tok) continue;
+    const start = m.index;
+    const end = start + tok.length;
+    const selectable =
+      /\S/.test(tok) && (/\w/.test(tok) || /[\u3400-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(tok));
+    tokens.push({ text: tok, start, end, selectable });
+  }
+  return tokens;
+}
+
+/** 统计段落内可选中词的数量 */
+export function countWords(text: string): number {
+  return splitWords(text).filter((t) => t.selectable).length;
 }
 
 export interface ReaderDoc {
