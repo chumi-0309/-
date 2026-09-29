@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Crypto from 'expo-crypto';
+import * as Crypto from 'expo-crypto';
 
 export type AnnotationType = 'highlight' | 'underline';
 

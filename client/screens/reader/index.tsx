@@ -8,7 +8,7 @@ import {
   NativeScrollEvent,
   Modal,
 } from 'react-native';
-import Clipboard from 'expo-clipboard';
+import * as Clipboard from 'expo-clipboard';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 import { Screen } from '@/components/Screen';

@@ -13,7 +13,12 @@ export default function TabLayout() {
     '--color-border',
   ]) as string[];
 
-  let tabBarStyle = {
+  let tabBarStyle: {
+    backgroundColor: string;
+    borderTopWidth: number;
+    borderTopColor: string;
+    height?: number | 'auto';
+  } = {
     backgroundColor: background,
     borderTopWidth: 1,
     borderTopColor: border,

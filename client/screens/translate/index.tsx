@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
-import Clipboard from 'expo-clipboard';
+import * as Clipboard from 'expo-clipboard';
 import Toast from 'react-native-toast-message';
 import { Screen } from '@/components/Screen';
 import { translateStream, LangCode } from '@/utils/api';
